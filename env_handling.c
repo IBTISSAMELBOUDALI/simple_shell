@@ -16,7 +16,7 @@ char **get_environ(info_t *info)
 		info->env_changed = 0;
 	}
 
-	return info->environ;
+	return (info->environ);
 }
 
 /**
@@ -35,7 +35,7 @@ int _unsetenv(info_t *info, char *var)
 	char *p;
 
 	if (!current || !var)
-		return 0;
+		return (0);
 
 	while (current)
 	{
@@ -52,7 +52,7 @@ int _unsetenv(info_t *info, char *var)
 		i++;
 	}
 
-	return info->env_changed;
+	return (info->env_changed);
 }
 
 /**
@@ -71,11 +71,11 @@ int _setenv(info_t *info, char *var, char *value)
 	char *p;
 
 	if (!var || !value)
-		return 0;
+		return (0);
 
 	new_env_var = malloc(_strlen(var) + _strlen(value) + 2);
 	if (!new_env_var)
-		return 1;
+		return (1);
 
 	_strcpy(new_env_var, var);
 	_strcat(new_env_var, "=");
@@ -89,7 +89,7 @@ int _setenv(info_t *info, char *var, char *value)
 			free(current->str);
 			current->str = new_env_var;
 			info->env_changed = 1;
-			return 0;
+			return (0);
 		}
 		current = current->next;
 	}
@@ -97,5 +97,5 @@ int _setenv(info_t *info, char *var, char *value)
 	add_node_end(&(info->env), new_env_var, 0);
 	info->env_changed = 1;
 
-	return 0;
+	return (0);
 }
